@@ -36,7 +36,7 @@ def encode(node, *nodes, maxInlineLength):
 
         return '{\n' + ',\n'.join(map(lambda item: encodeItem(item[0], item[1], node, *nodes, maxInlineLength=maxInlineLength), sorted(node.items(), key=objectKey)))  + '\n'+indent(node, *nodes) +'}'
     elif isinstance(node, str):
-        return '"'+node+'"'
+        return '"'+node.replace('\n','\\n')+'"'
     elif isinstance(node, bool):
         return 'true' if node else 'false'
     elif node is None:
