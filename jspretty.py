@@ -52,9 +52,7 @@ def indent(node, *nodes):
     return "  " * len(nodes)
 
 def objectKey(item):
-    foo = re.split('\\d+', item[0].upper())
-    # print(foo)
-    return foo
+    return list(filter(lambda element: len(element) > 0, re.split('(\\d+)', item[0].lower())))
 
 if __name__ == "__main__":
     main()
