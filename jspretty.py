@@ -30,6 +30,9 @@ def main():
 def encode(node, *nodes, options, isKey=False):
     if isinstance(node, list):
         allPrimitaves = True
+        if len(node) == 0:
+            return '[ ]'
+
         for element in node:
             if isinstance(element, list) or isinstance(element, dict):
                 allPrimitaves = False
@@ -40,6 +43,8 @@ def encode(node, *nodes, options, isKey=False):
 
         return '[\n' + ',\n'.join(map(lambda element: indent(element, node, *nodes)+encode(element, node, *nodes, options=options), node))+ '\n'+indent(node, *nodes) + ']'
     elif isinstance(node, dict):
+        if len(node) == 0:
+            return '{ }'
         allPrimitaves = True
         for value in node.values():
             if isinstance(value, list) or isinstance(value, dict):
