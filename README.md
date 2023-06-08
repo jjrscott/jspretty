@@ -42,7 +42,7 @@
 ## Usage
 
 ```
-usage: jspretty.py [-h] [-max-inline-length MAX_INLINE_LENGTH]
+usage: jspretty.py [-h] [--max-inline-length MAX_INLINE_LENGTH] [--color | --monochrome]
 
 Format JSON for improved ledgability
 
@@ -50,4 +50,6 @@ options:
   -h, --help            show this help message and exit
   --max-inline-length MAX_INLINE_LENGTH
                         Maximum length of inlined objects and arrays
+  --color               colorise JSON
+  --monochrome          monochrome (don't colorise JSON)
 ```
