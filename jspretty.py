@@ -56,13 +56,13 @@ def encode(node, *nodes, options, isKey=False):
 
         return '{\n' + ',\n'.join(map(lambda item: encodeItem(item[0], item[1], node, *nodes, options=options), sorted(node.items(), key=objectKey)))  + '\n'+indent(node, *nodes) +'}'
     elif isinstance(node, str):
-        return colorise((Colors.KEY if isKey else Colors.STRING), '"'+node.replace('\n','\\n')+'"', options)
+        return colorise((Colors.KEY if isKey else Colors.STRING), json.dumps(node), options)
     elif isinstance(node, bool):
-        return colorise(Colors.KEYWORD, ('true' if node else 'false'), options)
+        return colorise(Colors.KEYWORD, json.dumps(node), options)
     elif node is None:
-        return colorise(Colors.KEYWORD, 'null', options)
+        return colorise(Colors.KEYWORD, json.dumps(node), options)
     else:
-        return colorise(Colors.NUMBER, str(node), options)
+        return colorise(Colors.NUMBER, json.dumps(node), options)
 
 def colorise(color, value, options):
     if options.showColors:
