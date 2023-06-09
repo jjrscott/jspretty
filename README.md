@@ -4,40 +4,29 @@
 
 ## Example
 
-#### Compact
+#### js (compact)
 
-```JSON
-{"en5":["Hello","World"],"en10":["Hello","World"],"fr":["Bonjour","Monde"]}
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="images/jq-cS-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="images/jq-cS-light.svg">
+  <img alt="jq -cS output" src="images/jq-cS-light.svg">
+</picture>
 
-#### jq -S
+#### jq (pretty-printed)
 
-```json
-{
-  "en10": [
-    "Hello",
-    "World"
-  ],
-  "en5": [
-    "Hello",
-    "World"
-  ],
-  "fr": [
-    "Bonjour",
-    "Monde"
-  ]
-}
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="images/jq-S-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="images/jq-S-light.svg">
+  <img alt="jq -S output" src="images/jq-S-light.svg">
+</picture>
 
-#### python3 jspretty.py
+#### jspretty
 
-```json
-{
-  "en5": [ "Hello", "World" ],
-  "en10": [ "Hello", "World" ],
-  "fr": [ "Bonjour", "Monde" ]
-}
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="images/jspretty-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="images/jspretty-light.svg">
+  <img alt="jspretty output" src="images/jspretty-light.svg">
+</picture>
 
 ## Usage
 
