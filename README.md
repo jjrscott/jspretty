@@ -4,28 +4,28 @@
 
 ## Example
 
-#### js (compact)
+#### jspretty
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="images/jq-cS-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="images/jq-cS-light.svg">
-  <img alt="jq -cS output" src="images/jq-cS-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="images/jspretty-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="images/jspretty-light.png">
+  <img alt="jspretty output" src="images/jspretty-light.png">
+</picture>
+
+#### jq (compact)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="images/jq-cS-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="images/jq-cS-light.png">
+  <img alt="jq -cS output" src="images/jq-cS-light.png">
 </picture>
 
 #### jq (pretty-printed)
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="images/jq-S-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="images/jq-S-light.svg">
-  <img alt="jq -S output" src="images/jq-S-light.svg">
-</picture>
-
-#### jspretty
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="images/jspretty-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="images/jspretty-light.svg">
-  <img alt="jspretty output" src="images/jspretty-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="images/jq-S-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="images/jq-S-light.png">
+  <img alt="jq -S output" src="images/jq-S-light.png">
 </picture>
 
 ## Usage
