@@ -6,27 +6,18 @@
 
 #### jspretty
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="images/jspretty-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="images/jspretty-light.png">
-  <img alt="jspretty output" src="images/jspretty-light.png">
-</picture>
+![jspretty output](images/jspretty-dark.png#gh-dark-mode-only)
+![jspretty output](images/jspretty-light.png#gh-light-mode-only)
 
 #### jq (compact)
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="images/jq-cS-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="images/jq-cS-light.png">
-  <img alt="jq -cS output" src="images/jq-cS-light.png">
-</picture>
+![jq -cS output](images/jq-cS-dark.png#gh-dark-mode-only)
+![jq -cS output](images/jq-cS-light.png#gh-light-mode-only)
 
 #### jq (pretty-printed)
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="images/jq-S-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="images/jq-S-light.png">
-  <img alt="jq -S output" src="images/jq-S-light.png">
-</picture>
+![jq -S output](images/jq-S-dark.png#gh-dark-mode-only)
+![jq -S output](images/jq-S-light.png#gh-light-mode-only)
 
 ## Usage
 
