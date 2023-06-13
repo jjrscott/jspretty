@@ -9,6 +9,11 @@
 ![jspretty output](images/jspretty-dark.png#gh-dark-mode-only)
 ![jspretty output](images/jspretty-light.png#gh-light-mode-only)
 
+#### jspretty (annotated)
+
+![jspretty output](images/jspretty-annotate-dark.png#gh-dark-mode-only)
+![jspretty output](images/jspretty-annotate-light.png#gh-light-mode-only)
+
 #### jq (compact)
 
 ![jq -cS output](images/jq-cS-dark.png#gh-dark-mode-only)
@@ -22,7 +27,7 @@
 ## Usage
 
 ```
-usage: jspretty.py [-h] [--max-inline-length MAX_INLINE_LENGTH] [--color | --monochrome]
+usage: jspretty [-h] [--max-inline-length MAX_INLINE_LENGTH] [--annotate] [--color | --monochrome]
 
 Format JSON for improved ledgability
 
@@ -30,6 +35,7 @@ options:
   -h, --help            show this help message and exit
   --max-inline-length MAX_INLINE_LENGTH
                         Maximum length of inlined objects and arrays
+  --annotate            Annotate the output
   --color               colorise JSON
   --monochrome          monochrome (don't colorise JSON)
 ```

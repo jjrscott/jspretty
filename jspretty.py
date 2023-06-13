@@ -5,19 +5,25 @@ import argparse
 import os
 from collections import namedtuple
 
-class Colors:
-    KEY = '\033[38;5;31m'
-    COMMENT = '\032[38;5;28m'
-    STRING = '\033[38;5;160m'
-    PLAIN = '\033[0m'
-    KEYWORD = '\033[38;5;198m'
-    NUMBER = '\033[38;5;221m'
+def RGB(red, green, blue):
+    value = red * 36 + green * 6 + blue + 16
+    return '\033[38;5;'+str(value)+'m'
 
-Options = namedtuple('Options', ['maxInlineLength', 'showColors'])
+class Colors:
+    KEY = RGB(0, 2, 3)
+    COMMENT = RGB(0, 2, 0)
+    STRING = RGB(4, 0, 0)
+    PLAIN = '\033[0m'
+    NULL = RGB(5, 0, 2)
+    BOOLEAN = RGB(5, 0, 2)
+    NUMBER = RGB(5, 4, 1)
+
+Options = namedtuple('Options', ['maxInlineLength', 'showColors', 'shouldAnnotate'])
 
 def main():
-    parser = argparse.ArgumentParser(description="Format JSON for improved ledgability")
+    parser = argparse.ArgumentParser(prog='jspretty', description="Format JSON for improved ledgability")
     parser.add_argument('--max-inline-length', default=120, type=int, help="Maximum length of inlined objects and arrays")
+    parser.add_argument('--annotate', dest='shouldAnnotate', default=False, action='store_true', help="Annotate the output")
     command_group = parser.add_mutually_exclusive_group()
     command_group.add_argument('--color', dest='should_colorise', default=sys.stdout.isatty(), action='store_true', help="colorise JSON")
     command_group.add_argument('--monochrome', dest='should_colorise', default=sys.stdout.isatty(), action='store_false', help="monochrome (don't colorise JSON)")
@@ -25,7 +31,7 @@ def main():
     args = parser.parse_args()
 
     root = json.loads(sys.stdin.read())
-    print(encode(root, options=Options(args.max_inline_length, args.should_colorise)))
+    print(encode(root, options=Options(args.max_inline_length, args.should_colorise, args.shouldAnnotate)))
 
 def encode(node, *nodes, options, isKey=False):
     if isinstance(node, list):
@@ -37,11 +43,11 @@ def encode(node, *nodes, options, isKey=False):
             if isinstance(element, list) or isinstance(element, dict):
                 allPrimitaves = False
         if allPrimitaves:
-            text = '[ ' + ', '.join(map(lambda element: encode(element, node, *nodes, options=options), node))+ ' ]'
+            text = '[ ' + ', '.join(map(lambda element: encode(element, node, *nodes, options=options), enumerate(node)))+ ' ]'
             if len(text) < options.maxInlineLength:
                 return text
 
-        return '[\n' + ',\n'.join(map(lambda element: indent(element, node, *nodes)+encode(element, node, *nodes, options=options), node))+ '\n'+indent(node, *nodes) + ']'
+        return '[\n' + ',\n'.join(map(lambda element: indent(element, node, *nodes)+encode(element, node, *nodes, options=options), enumerate(node)))+ '\n'+indent(node, *nodes) + ']'
     elif isinstance(node, dict):
         if len(node) == 0:
             return '{ }'
@@ -58,9 +64,14 @@ def encode(node, *nodes, options, isKey=False):
     elif isinstance(node, str):
         return colorise((Colors.KEY if isKey else Colors.STRING), json.dumps(node), options)
     elif isinstance(node, bool):
-        return colorise(Colors.KEYWORD, json.dumps(node), options)
+        return colorise(Colors.BOOLEAN, json.dumps(node), options)
     elif node is None:
-        return colorise(Colors.KEYWORD, json.dumps(node), options)
+        return colorise(Colors.NULL, json.dumps(node), options)
+    elif isinstance(node, tuple):
+        if options.shouldAnnotate:
+            return colorise(Colors.COMMENT, f'/* {node[0]} */', options)+' '+encode(node[1], *nodes, options=options)
+        else:
+            return encode(node[1], *nodes, options=options)
     else:
         return colorise(Colors.NUMBER, json.dumps(node), options)
 
