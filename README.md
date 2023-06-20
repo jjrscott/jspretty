@@ -14,20 +14,16 @@
 ![jspretty output](images/jspretty-annotate-dark.png#gh-dark-mode-only)
 ![jspretty output](images/jspretty-annotate-light.png#gh-light-mode-only)
 
-#### jq (compact)
+#### jspretty (hiding quotes)
 
-![jq -cS output](images/jq-cS-dark.png#gh-dark-mode-only)
-![jq -cS output](images/jq-cS-light.png#gh-light-mode-only)
+![jspretty output](images/jspretty-hide-quotes-dark.png#gh-dark-mode-only)
+![jspretty output](images/jspretty-hide-quotes-light.png#gh-light-mode-only)
 
-#### jq (pretty-printed)
-
-![jq -S output](images/jq-S-dark.png#gh-dark-mode-only)
-![jq -S output](images/jq-S-light.png#gh-light-mode-only)
 
 ## Usage
 
 ```
-usage: jspretty [-h] [--max-inline-length MAX_INLINE_LENGTH] [--annotate] [--color | --monochrome]
+usage: jspretty [-h] [--max-inline-length MAX_INLINE_LENGTH] [--annotate] [--hide-quotes] [--color | --monochrome]
 
 Format JSON for improved ledgability
 
@@ -36,6 +32,7 @@ options:
   --max-inline-length MAX_INLINE_LENGTH
                         Maximum length of inlined objects and arrays
   --annotate            Annotate the output
+  --hide-quotes         Show strings without quotes
   --color               colorise JSON
   --monochrome          monochrome (don't colorise JSON)
 ```

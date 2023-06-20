@@ -18,12 +18,13 @@ class Colors:
     BOOLEAN = RGB(5, 0, 2)
     NUMBER = RGB(5, 4, 1)
 
-Options = namedtuple('Options', ['maxInlineLength', 'showColors', 'shouldAnnotate'])
+Options = namedtuple('Options', ['maxInlineLength', 'showColors', 'shouldAnnotate', 'hideQuotes'])
 
 def main():
     parser = argparse.ArgumentParser(prog='jspretty', description="Format JSON for improved ledgability")
     parser.add_argument('--max-inline-length', default=120, type=int, help="Maximum length of inlined objects and arrays")
     parser.add_argument('--annotate', dest='shouldAnnotate', default=False, action='store_true', help="Annotate the output")
+    parser.add_argument('--hide-quotes', dest='hideQuotes', default=False, action='store_true', help="Show strings without quotes")
     command_group = parser.add_mutually_exclusive_group()
     command_group.add_argument('--color', dest='should_colorise', default=sys.stdout.isatty(), action='store_true', help="colorise JSON")
     command_group.add_argument('--monochrome', dest='should_colorise', default=sys.stdout.isatty(), action='store_false', help="monochrome (don't colorise JSON)")
@@ -31,7 +32,7 @@ def main():
     args = parser.parse_args()
 
     root = json.loads(sys.stdin.read())
-    print(encode(root, options=Options(args.max_inline_length, args.should_colorise, args.shouldAnnotate)))
+    print(encode(root, options=Options(args.max_inline_length, args.should_colorise, args.shouldAnnotate, args.hideQuotes)))
 
 def encode(node, *nodes, options, isKey=False):
     if isinstance(node, list):
@@ -62,7 +63,7 @@ def encode(node, *nodes, options, isKey=False):
 
         return '{\n' + ',\n'.join(map(lambda item: encodeItem(item[0], item[1], node, *nodes, options=options), sorted(node.items(), key=objectKey)))  + '\n'+indent(node, *nodes) +'}'
     elif isinstance(node, str):
-        return colorise((Colors.KEY if isKey else Colors.STRING), json.dumps(node), options)
+        return colorise((Colors.KEY if isKey else Colors.STRING), (node if options.hideQuotes else json.dumps(node)), options)
     elif isinstance(node, bool):
         return colorise(Colors.BOOLEAN, json.dumps(node), options)
     elif node is None:
