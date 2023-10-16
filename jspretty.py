@@ -21,8 +21,13 @@ class Colors:
 Options = namedtuple('Options', ['maxInlineLength', 'showColors', 'shouldAnnotate', 'hideQuotes'])
 
 def main():
+    try:
+        defaultMaxInlineLength = os.get_terminal_size().columns
+    except:
+        defaultMaxInlineLength = 120
+
     parser = argparse.ArgumentParser(prog='jspretty', description="Format JSON for improved ledgability")
-    parser.add_argument('--max-inline-length', default=120, type=int, help="Maximum length of inlined objects and arrays")
+    parser.add_argument('--max-inline-length', default=defaultMaxInlineLength, type=int, help="Maximum length of inlined objects and arrays")
     parser.add_argument('--annotate', dest='shouldAnnotate', default=False, action='store_true', help="Annotate the output")
     parser.add_argument('--hide-quotes', dest='hideQuotes', default=False, action='store_true', help="Show strings without quotes")
     command_group = parser.add_mutually_exclusive_group()
